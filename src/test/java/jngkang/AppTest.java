@@ -1,4 +1,4 @@
-package com.jngkang;
+package jngkang;
 
 import com.jngkang.utils.GenObjUtil;
 
@@ -10,7 +10,7 @@ import com.jngkang.utils.GenObjUtil;
 public class AppTest {
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
-            System.out.println(GenObjUtil.build(com.jngkang.Emp.class));
+            System.out.println(GenObjUtil.build(Emp.class));
         }
     }
 }

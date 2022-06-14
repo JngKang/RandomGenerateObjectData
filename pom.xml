@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>groupId</groupId>
+    <artifactId>RandomGenerateObjectData</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>github</id>
+            <name>RandomGenerateObjectData</name>
+            <url>https://github.com/JngKang/RandomGenerateObjectData</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <!--源码-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--github上传插件,用于修改后的发布,执行 mvn clean deploy 自动打包上传到github-->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>Creating</message>
+                    <noJekyll>true</noJekyll>
+                    <!--本地jar地址, 对应上面的altDeploymentRepository-->
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <!--分支-->
+                    <branch>refs/heads/master</branch>
+                    <merge>true</merge>
+
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <!--对应github上创建的仓库名称 name-->
+                    <repositoryName>RandomGenerateObjectData</repositoryName>
+                    <!--github登录账号 对应的密码存在maven的setting.xml文件中-->
+                    <!--由github组织拥有，则该值将是组织名称，如果由用户拥有，则该值将是用户名-->
+                    <repositoryOwner>JngKang</repositoryOwner>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

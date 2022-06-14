@@ -1,4 +1,4 @@
-package com.jngkang;
+package jngkang;
 
 import com.jngkang.anno.DataRange;
 import com.jngkang.enumeration.StringTypeEnum;
